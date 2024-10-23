@@ -12,24 +12,13 @@ const contactEmail = createTransport({
 });
 
 export default async function handler(req, res) {
-  // Define the allowed origins
-  const allowedOrigins = [
-    "http://localhost:3000/sirenscripts",
-    "https://rahules24.github.io/sirenscripts/",
-  ];
-
-  const origin = req.headers.origin;
-
-  // Check if the origin is allowed
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
-
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Allow both origins
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   // Handle preflight requests (OPTIONS)
-  if (req.method === "OPTIONS") {
+  if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
